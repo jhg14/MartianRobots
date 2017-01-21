@@ -10,7 +10,13 @@ public class Grid {
 
     List<Robot> robots;
 
+    public final int maxX;
+    public final int maxY;
+
     public Grid(int upperRightx, int upperRighty) {
+
+        this.maxX = upperRightx;
+        this.maxY = upperRighty;
 
         robots = new ArrayList<>();
 
