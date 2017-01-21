@@ -20,6 +20,10 @@ public class Robot {
         lost = false;
     }
 
+    public void changeOrientation(Orientation orientation) {
+        this.orientation = orientation;
+    }
+
     public boolean isLost() {
         return lost;
     }
