@@ -30,4 +30,18 @@ public class Grid {
         robots.add(robot);
     }
 
+    @Override
+    public String toString() {
+
+        StringBuilder builder = new StringBuilder();
+
+        for (Robot robot : robots) {
+            builder.append(robot.toString());
+            builder.append('\n');
+        }
+        builder.deleteCharAt(builder.lastIndexOf("\n"));
+
+        return builder.toString();
+    }
+
 }
