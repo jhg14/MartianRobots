@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,9 +26,14 @@ public class Robot {
         this.y = y;
         this.orientation = orientation;
         this.grid = grid;
+        instructions = new ArrayList<>();
         parseInstructions(instructionString);
         lost = false;
     }
+
+    public int getX() { return x; }
+
+    public int getY() { return y; }
 
     public Orientation getOrientation() { return orientation; }
 
@@ -39,27 +45,26 @@ public class Robot {
     // potentially for future features
     public void moveRobot (int xAmount, int yAmount) {
 
-        for (int i = 0; i < xAmount; i++) {
+        int xStep = xAmount != 0 ? xAmount/Math.abs(xAmount) : 0;
+        int yStep = yAmount != 0 ? yAmount/Math.abs(yAmount) : 0;
+
+        for (int i = 0; i < Math.abs(xAmount); i++) {
             if (x+1 > grid.maxX) {
                 this.setLost();
                 grid.grid[x][y].markScented();
             } else {
-                x++;
+                x+=xStep;
             }
         }
 
-        for (int j = 0; j < yAmount; j++) {
+        for (int j = 0; j < Math.abs(yAmount); j++) {
             if (y+1 > grid.maxY) {
                 this.setLost();
                 grid.grid[x][y].markScented();
             } else {
-                y++;
+                y+=yStep;
             }
         }
-    }
-
-    public boolean isLost() {
-        return lost;
     }
 
     public void setLost() {
@@ -67,7 +72,15 @@ public class Robot {
     }
 
     public void parseInstructions(String instructionString) {
+        for (char c : instructionString.toCharArray()) {
+            instructions.add(Commands.parseCommandChar(c));
+        }
+    }
 
+    public void executeInstructions() {
+        for (Commands command : instructions) {
+            command.function.apply(this);
+        }
     }
 
     @Override
