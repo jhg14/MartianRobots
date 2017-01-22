@@ -36,6 +36,10 @@ public class Grid {
         robots.add(robot);
     }
 
+    public void executeRobots() {
+        robots.forEach(robot -> robot.executeInstructions());
+    }
+
     @Override
     public String toString() {
 

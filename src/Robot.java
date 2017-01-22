@@ -51,12 +51,14 @@ public class Robot {
         for (int i = 0; i < Math.abs(xAmount); i++) {
             if ((x+xStep) > grid.maxX) {
                 if (grid.grid[x][y].isScented()) {
-                    // A robot has fallen here previously so execution should stop
+                    // A robot has fallen here previously
+                    // so return and ignore this instruction
+                    return true;
                 } else {
                     this.setLost();
                     grid.grid[x][y].markScented();
+                    return false;
                 }
-                return false;
             } else {
                 x+=xStep;
             }
@@ -65,12 +67,12 @@ public class Robot {
         for (int j = 0; j < Math.abs(yAmount); j++) {
             if ((y+yStep) > grid.maxY) {
                 if (grid.grid[x][y].isScented()) {
-                    // A robot has falled here previously so execution should stop
+                    return true;
                 } else {
                     this.setLost();
                     grid.grid[x][y].markScented();
+                    return false;
                 }
-                return false;
             } else {
                 y+=yStep;
             }
