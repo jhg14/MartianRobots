@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Created by JHGWhite on 20/01/2017.
  */
@@ -13,14 +15,17 @@ public class Robot {
     // The grid that the robot is on
     private Grid grid;
 
+    private List<Commands> instructions;
+
     // Whether or not the Robot has fallen off the edge
     private boolean lost;
 
-    public Robot(int x, int y, Orientation orientation, Grid grid) {
+    public Robot(int x, int y, Orientation orientation, Grid grid, String instructionString) {
         this.x = x;
         this.y = y;
         this.orientation = orientation;
         this.grid = grid;
+        parseInstructions(instructionString);
         lost = false;
     }
 
@@ -59,6 +64,10 @@ public class Robot {
 
     public void setLost() {
         lost = true;
+    }
+
+    public void parseInstructions(String instructionString) {
+
     }
 
     @Override
