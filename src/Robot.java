@@ -43,33 +43,46 @@ public class Robot {
 
     // Allows for multiple steps in directions that are not being faced,
     // potentially for future features
-    public void moveRobot (int xAmount, int yAmount) {
+    public boolean moveRobot (int xAmount, int yAmount) {
 
         int xStep = xAmount != 0 ? xAmount/Math.abs(xAmount) : 0;
         int yStep = yAmount != 0 ? yAmount/Math.abs(yAmount) : 0;
 
         for (int i = 0; i < Math.abs(xAmount); i++) {
-            if (x+1 > grid.maxX) {
-                this.setLost();
-                grid.grid[x][y].markScented();
+            if ((x+xStep) > grid.maxX) {
+                if (grid.grid[x][y].isScented()) {
+                    // A robot has fallen here previously so execution should stop
+                } else {
+                    this.setLost();
+                    grid.grid[x][y].markScented();
+                }
+                return false;
             } else {
                 x+=xStep;
             }
         }
 
         for (int j = 0; j < Math.abs(yAmount); j++) {
-            if (y+1 > grid.maxY) {
-                this.setLost();
-                grid.grid[x][y].markScented();
+            if ((y+yStep) > grid.maxY) {
+                if (grid.grid[x][y].isScented()) {
+                    // A robot has falled here previously so execution should stop
+                } else {
+                    this.setLost();
+                    grid.grid[x][y].markScented();
+                }
+                return false;
             } else {
                 y+=yStep;
             }
         }
+        return true;
     }
 
     public void setLost() {
         lost = true;
     }
+
+    public boolean isLost() { return lost; }
 
     public void parseInstructions(String instructionString) {
         for (char c : instructionString.toCharArray()) {
@@ -79,13 +92,14 @@ public class Robot {
 
     public void executeInstructions() {
         for (Commands command : instructions) {
-            command.function.apply(this);
+            if (!command.function.apply(this))
+                break;
         }
     }
 
     @Override
     public String toString() {
-        return x + " " + y + " " + orientation + (lost ? "LOST" : "");
+        return x + " " + y + " " + orientation + (lost ? " LOST" : "");
     }
 
 }

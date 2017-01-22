@@ -52,4 +52,20 @@ public class RobotTest {
         assertThat(robot.getY(), is(0));
 
     }
+
+    @Test
+    public void RobotGetsLostTest() throws Exception {
+
+        Grid grid = new Grid(5, 3);
+
+        Robot robot = new Robot(3, 2, Orientation.N, grid, "FRRFLLFFRRFLL");
+
+        robot.executeInstructions();
+
+        assertThat(robot.getOrientation(), is(Orientation.N));
+        assertThat(robot.getX(), is(3));
+        assertThat(robot.getY(), is(3));
+        assertThat(robot.isLost(), is(true));
+
+    }
 }

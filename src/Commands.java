@@ -7,24 +7,23 @@ public enum Commands {
 
     Left('L', robot -> {
         robot.setOrientation(robot.getOrientation().anticlockwiseRotation());
-        return null;
+        return true;
     }),
 
     Right('R', robot -> {
         robot.setOrientation(robot.getOrientation().clockwiseRotation());
-        return null;
+        return true;
     }),
 
     Forward('F', robot -> {
         Orientation orientation = robot.getOrientation();
-        robot.moveRobot(orientation.x, orientation.y);
-        return null;
+        return robot.moveRobot(orientation.x, orientation.y);
     });
 
-    public final Function<Robot, Void> function;
+    public final Function<Robot, Boolean> function;
     public final char code;
 
-    Commands(char code, Function<Robot, Void> function) {
+    Commands(char code, Function<Robot, Boolean> function) {
         this.code = code;
         this.function = function;
     }
