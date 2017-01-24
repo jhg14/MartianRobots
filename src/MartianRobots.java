@@ -26,7 +26,6 @@ public class MartianRobots {
     public static Grid parseString(String input) {
 
         Grid grid;
-        List<Robot> robots = new ArrayList<>();
 
         String[] inputs = input.split("\n");
 
@@ -37,7 +36,6 @@ public class MartianRobots {
         int upperRightY = Integer.parseInt(gridStrings[1]);
 
         grid = new Grid(upperRightX, upperRightY);
-
 
         // Robots
         for (int i = 1; i < inputs.length; i+=3) {
@@ -55,11 +53,7 @@ public class MartianRobots {
 
             Robot robot = new Robot(x, y, o, grid, robotInstructionString);
 
-            //robots.add(robot);
-
             grid.addRobot(robot);
-
-            // TEST
         }
 
         return grid;
