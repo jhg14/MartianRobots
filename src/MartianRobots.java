@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -8,6 +6,9 @@ import java.util.Scanner;
 public class MartianRobots {
 
     public static void main(String[] args) {
+
+        System.out.println("Please enter your input.");
+        System.out.println("Once you are finished, please press enter twice");
 
         Scanner input = new Scanner(System.in);
         input.useDelimiter("\n\n\n");

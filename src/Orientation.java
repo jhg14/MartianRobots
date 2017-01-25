@@ -19,6 +19,10 @@ public enum Orientation {
         this.y = y;
     }
 
+    /*
+        Returns the orientation received when rotating
+        clockwise 90 deg.
+     */
     public Orientation clockwiseRotation() {
         int newX = x * COS_90 + y * SIN_90;
         int newY = x * -SIN_90 + y * COS_90;
@@ -31,6 +35,10 @@ public enum Orientation {
         return null;
     }
 
+    /*
+        Returns the orientation received when rotating
+        anticlockwise 90 deg.
+     */
     public Orientation anticlockwiseRotation() {
         int newX = x * COS_NEG_90 + y * SIN_NEG_90;
         int newY = x * -SIN_NEG_90 + y * COS_NEG_90;

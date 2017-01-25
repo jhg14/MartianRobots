@@ -36,6 +36,9 @@ public class Grid {
         robots.add(robot);
     }
 
+    /*
+        Executes each robot's command set sequentially
+     */
     public void executeRobots() {
         robots.forEach(robot -> robot.executeInstructions());
     }

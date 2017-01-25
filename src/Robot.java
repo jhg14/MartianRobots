@@ -86,12 +86,18 @@ public class Robot {
 
     public boolean isLost() { return lost; }
 
+    /*
+        Parses string instructions into a list of commands
+     */
     public void parseInstructions(String instructionString) {
         for (char c : instructionString.toCharArray()) {
             instructions.add(Commands.parseCommandChar(c));
         }
     }
 
+    /*
+        Executes instructions for robot
+     */
     public void executeInstructions() {
         for (Commands command : instructions) {
             if (!command.function.apply(this))
